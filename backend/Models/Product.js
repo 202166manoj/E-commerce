@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+ import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema({
   name: {
@@ -94,4 +94,4 @@ productSchema.methods.reduceStock = function(color, size, quantity) {
   return false;
 };
 
-module.exports = mongoose.model('Product', productSchema);
+export default mongoose.model('Product', productSchema);

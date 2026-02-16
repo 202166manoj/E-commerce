@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const Admin = require('../Models/Admin.js');
+ import jwt from 'jsonwebtoken';
+import Admin from '../Models/Admin.js';
 
 // Verify JWT token
 const authenticateAdmin = async (req, res, next) => {
@@ -58,7 +58,7 @@ const isSuperAdmin = (req, res, next) => {
   next();
 };
 
-module.exports = {
+export {
   authenticateAdmin,
   isSuperAdmin
 };

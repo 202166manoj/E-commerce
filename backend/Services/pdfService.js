@@ -1,6 +1,6 @@
-const PDFDocument = require('pdfkit');
-const fs = require('fs');
-const path = require('path');
+ import PDFDocument from 'pdfkit';
+import fs from 'fs';
+import path from 'path';
 
 const generateInvoicePDF = async (order, filePath) => {
   return new Promise((resolve, reject) => {
@@ -186,6 +186,6 @@ const generateInvoicePDF = async (order, filePath) => {
   });
 };
 
-module.exports = {
+export {
   generateInvoicePDF
 };

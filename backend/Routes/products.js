@@ -1,9 +1,10 @@
-const express = require('express');
+ import express from 'express';
+import Product from '../Models/Product.js';
+import { authenticateAdmin } from '../Middleware/authMiddleware.js';
+import multer from 'multer';
+import path from 'path';
+
 const router = express.Router();
-const Product = require('../Models/Product.js');
-const { authenticateAdmin } = require('../middleware/authMiddleware');
-const multer = require('multer');
-const path = require('path');
 
 // Configure multer for image upload
 const storage = multer.diskStorage({
@@ -215,4 +216,4 @@ router.delete('/:id', authenticateAdmin, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,12 +1,18 @@
-const express = require('express');
+ import express from 'express';
+import Order from '../Models/Order.js';
+import Product from '../Models/Product.js';
+import { authenticateAdmin } from '../Middleware/authMiddleware.js';
+import { sendOrderConfirmation, sendOrderShipped, sendOrderDelivered } from '../Services/emailService.js';
+import { generateInvoicePDF } from '../Services/pdfService.js';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const router = express.Router();
-const Order = require('../Models/Order.js');
-const Product = require('../Models/Product.js');
-const { authenticateAdmin } = require('../middleware/authMiddleware');
-const { sendOrderConfirmation, sendOrderShipped, sendOrderDelivered } = require('../services/emailService');
-const { generateInvoicePDF } = require('../services/pdfService');
-const path = require('path');
-const fs = require('fs');
 
 // @route   POST /api/orders
 // @desc    Create new order
@@ -325,4 +331,4 @@ router.get('/stats/dashboard', authenticateAdmin, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

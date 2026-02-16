@@ -1,8 +1,9 @@
-const express = require('express');
+ import express from 'express';
+import jwt from 'jsonwebtoken';
+import Admin from '../Models/Admin.js';
+import { authenticateAdmin } from '../Middleware/authMiddleware.js';
+
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const Admin = require('../Models/Admin.js');
-const { authenticateAdmin } = require('../middleware/authMiddleware');
 
 // @route   POST /api/admin/register
 // @desc    Register new admin
@@ -183,4 +184,4 @@ router.put('/password', authenticateAdmin, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
