@@ -25,10 +25,9 @@ uploadDirs.forEach(dir => {
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+ const connectionString = "mongodb+srv://admin:1234@cluster0.sffw3sz.mongodb.net/?appName=Cluster0"
+
+ mongoose.connect(connectionString)
 .then(() => console.log('✅ MongoDB Connected Successfully'))
 .catch((err) => {
   console.error('❌ MongoDB Connection Error:', err);
