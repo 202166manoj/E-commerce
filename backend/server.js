@@ -1,9 +1,17 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const path = require('path');
-const fs = require('fs');
+ import dotenv from 'dotenv';
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// ES6 module __dirname equivalent
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+dotenv.config();
 
 const app = express();
 
@@ -25,9 +33,10 @@ uploadDirs.forEach(dir => {
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Database connection
- const connectionString = "mongodb+srv://admin:1234@cluster0.sffw3sz.mongodb.net/?appName=Cluster0"
+const connectionString = "mongodb+srv://admin:1234@cluster0.sffw3sz.mongodb.net/?appName=Cluster0"
 
- mongoose.connect(connectionString)
+
+mongoose.connect( connectionString)
 .then(() => console.log('✅ MongoDB Connected Successfully'))
 .catch((err) => {
   console.error('❌ MongoDB Connection Error:', err);
@@ -35,9 +44,13 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 });
 
 // Routes
-app.use('/api/admin', require('./routes/admin'));
-app.use('/api/products', require('./routes/products'));
-app.use('/api/orders', require('./routes/orders'));
+import adminRoutes from './Routes/admin.js';
+import productRoutes from './Routes/products.js';
+import orderRoutes from './Routes/orders.js';
+
+app.use('/api/admin', adminRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
@@ -88,4 +101,4 @@ app.listen(PORT, () => {
   console.log(`📧 Email configured: ${process.env.EMAIL_USER ? 'Yes' : 'No'}`);
 });
 
-module.exports = app;
+export default app;
